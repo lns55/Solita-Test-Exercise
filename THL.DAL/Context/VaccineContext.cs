@@ -1,23 +1,35 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using THL.DAL.Entities;
 
 namespace THL.DAL.Context
 {
-    class VaccineContext : DbContext
+    public class VaccineContext : DbContext
     {
-        public VaccineContext(DbContextOptions<VaccineContext> options)
-            : base(options)
+        public VaccineContext()
         {
             Database.EnsureCreatedAsync();
         }
 
-        public DbSet<Vaccine> Vaccine { get; set; }
+        public DbSet<Vaccine> Vaccines { get; set; }
 
-        public DbSet<VaccineOrder> VaccineOrder { get; set; }
+        public DbSet<VaccineOrder> VaccineOrders { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=THLVaccinationAppDB;Trusted_Connection=True;");
+        }
+
+        public class VaccineOrderConfiguration : IEntityTypeConfiguration<VaccineOrder>
+        {
+            public void Configure(EntityTypeBuilder<VaccineOrder> builder)
+            {
+                builder.Property(v => v.JsonFile)
+                    .HasJsonValueConversion();
+            }
+        }
+
+      
     }
 }

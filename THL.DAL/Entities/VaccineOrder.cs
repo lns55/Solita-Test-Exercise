@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace THL.DAL.Entities
 {
-    class VaccineOrder
+    public class VaccineOrder
     {
         [Required]
         public string Id { get; set; }
@@ -25,5 +26,7 @@ namespace THL.DAL.Entities
 
         [Required, DataType(DataType.DateTime)]
         public DateTime Arrived { get; set; }
+
+        public JObject JsonFile { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace THL.DAL.Entities
 {
-    class Vaccine
+    public class Vaccine
     {
         [Required]
         public string Id { get; set; }
