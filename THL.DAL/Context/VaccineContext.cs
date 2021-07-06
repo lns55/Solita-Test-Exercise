@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using THL.DAL.Entities;
 
 namespace THL.DAL.Context
@@ -9,7 +11,7 @@ namespace THL.DAL.Context
     {
         public VaccineContext()
         {
-            Database.EnsureCreatedAsync();
+            Database.EnsureCreated();
         }
 
         public DbSet<Vaccine> Vaccines { get; set; }
@@ -21,13 +23,24 @@ namespace THL.DAL.Context
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=THLVaccinationAppDB;Trusted_Connection=True;");
         }
 
-        public class VaccineOrderConfiguration : IEntityTypeConfiguration<VaccineOrder>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            public void Configure(EntityTypeBuilder<VaccineOrder> builder)
+            modelBuilder.Entity<VaccineOrder>().HasData(vaccineOrdersData());
+        }
+
+        public List<VaccineOrder> vaccineOrdersData()
+        {
+            var data = new List<VaccineOrder>();
+
+            using (StreamReader r = new StreamReader(@"../THL.DAL/Data/Antiqua.json"))
             {
-                builder.Property(v => v.JsonFile)
-                    .HasJsonValueConversion();
-            }
+                string json = r.ReadToEnd();
+                data = JsonConvert.DeserializeObject<List<VaccineOrder>>(json);
+
+                r.Close();
+            } 
+            
+            return data;
         }
 
       

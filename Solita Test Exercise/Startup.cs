@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using THL.DAL.Context;
 
 namespace Solita_Test_Exercise
 {
@@ -24,6 +25,8 @@ namespace Solita_Test_Exercise
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<VaccineContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

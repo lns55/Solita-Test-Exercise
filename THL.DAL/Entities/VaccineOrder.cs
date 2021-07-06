@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace THL.DAL.Entities
 {
@@ -10,23 +11,24 @@ namespace THL.DAL.Entities
         public string Id { get; set; }
 
         [Required, Range(1, 10000)]
-        public int OrderNnumber { get; set; }
+        public int OrderNumber { get; set; }
 
-        [Required, StringLength(20)]
+        [Required, StringLength(30)]
         public string ResponsiblePerson { get; set; }
 
-        [Required, StringLength(5)]
-        public string HeatlhCareDistrict { get; set; }
+        [Required, StringLength(10)]
+        public string HealthCareDistrict { get; set; }
 
-        [Required, StringLength(15)]
+        [Required, StringLength(20)]
         public string Vaccine { get; set; }
 
-        [Required, Range(1,10)]
+        [Required, Range(1,20)]
         public int Injections { get; set; }
 
         [Required, DataType(DataType.DateTime)]
         public DateTime Arrived { get; set; }
 
+        [NotMapped]
         public JObject JsonFile { get; set; }
     }
 }
