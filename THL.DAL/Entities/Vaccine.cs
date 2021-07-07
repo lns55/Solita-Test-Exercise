@@ -5,8 +5,9 @@ namespace THL.DAL.Entities
 {
     public class Vaccine
     {
+
         [Required]
-        public string Id { get; set; }
+        public string VaccinationId { get; set; }
 
         [Required]
         public string SourceBottle { get; set; }

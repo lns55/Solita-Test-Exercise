@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -25,24 +24,71 @@ namespace THL.DAL.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VaccineOrder>().HasData(vaccineOrdersData());
+            modelBuilder.Entity<VaccineOrder>().HasData(Antiqua());
+            modelBuilder.Entity<VaccineOrder>().HasData(SolarBuddhica());
+            modelBuilder.Entity<VaccineOrder>().HasData(Zerpfy());
+            modelBuilder.Entity<Vaccine>().HasKey(v => new { v.VaccinationId });
+            modelBuilder.Entity<Vaccine>().HasData(Vaccinations());
         }
 
-        public List<VaccineOrder> vaccineOrdersData()
+        public List<VaccineOrder> Antiqua()
         {
             var data = new List<VaccineOrder>();
 
-            using (StreamReader r = new StreamReader(@"../THL.DAL/Data/Antiqua.json"))
+            using (StreamReader reader = new StreamReader(@"../THL.DAL/Data/Antiqua.json"))
             {
-                string json = r.ReadToEnd();
+                string json = reader.ReadToEnd();
                 data = JsonConvert.DeserializeObject<List<VaccineOrder>>(json);
 
-                r.Close();
-            } 
-            
+                reader.Close();
+            }
+
             return data;
         }
 
-      
+        public List<VaccineOrder> SolarBuddhica()
+        {
+            var data = new List<VaccineOrder>();
+
+            using (StreamReader reader = new StreamReader(@"../THL.DAL/Data/SolarBuddhica.json"))
+            {
+                string json = reader.ReadToEnd();
+                data = JsonConvert.DeserializeObject<List<VaccineOrder>>(json);
+
+                reader.Close();
+            }
+
+            return data;
+        }
+
+        public List<VaccineOrder> Zerpfy()
+        {
+            var data = new List<VaccineOrder>();
+
+            using (StreamReader reader = new StreamReader(@"../THL.DAL/Data/Zerpfy.json"))
+            {
+                string json = reader.ReadToEnd();
+                data = JsonConvert.DeserializeObject<List<VaccineOrder>>(json);
+
+                reader.Close();
+            }
+
+            return data;
+        }
+
+        public List<Vaccine> Vaccinations()
+        {
+            var data = new List<Vaccine>();
+
+            using (StreamReader reader = new StreamReader(@"../THL.DAL/Data/Vaccinations.json"))
+            {
+                string json = reader.ReadToEnd();
+                data = JsonConvert.DeserializeObject<List<Vaccine>>(json);
+
+                reader.Close();
+            }
+
+            return data;
+        }
     }
 }
