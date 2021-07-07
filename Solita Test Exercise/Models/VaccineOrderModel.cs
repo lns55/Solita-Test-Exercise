@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace THL.DAL.Entities
+namespace Solita_Test_Exercise.Models
 {
-    public class VaccineOrder
+    public class VaccineOrderModel
     {
         [Required]
         public string Id { get; set; }
@@ -22,11 +20,10 @@ namespace THL.DAL.Entities
         [Required, StringLength(20)]
         public string Vaccine { get; set; }
 
-        [Required, Range(1,20)]
+        [Required, Range(1, 20)]
         public int Injections { get; set; }
 
         [Required, DataType(DataType.DateTime)]
         public DateTime Arrived { get; set; }
-
     }
 }
