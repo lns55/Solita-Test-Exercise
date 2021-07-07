@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Solita_Test_Exercise.Controllers;
+using Solita_Test_Exercise.Services;
 using THL.DAL.Context;
 
 namespace Solita_Test_Exercise
@@ -27,6 +24,8 @@ namespace Solita_Test_Exercise
             services.AddControllersWithViews();
 
             services.AddDbContext<VaccineContext>();
+
+            services.AddScoped<DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

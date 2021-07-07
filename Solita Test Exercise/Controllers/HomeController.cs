@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Solita_Test_Exercise.Models;
-using System;
-using System.Collections.Generic;
+using Solita_Test_Exercise.Services;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using THL.DAL.Context;
 
 namespace Solita_Test_Exercise.Controllers
 {
@@ -14,15 +10,19 @@ namespace Solita_Test_Exercise.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DataService _dataService;
+
+        public HomeController(ILogger<HomeController> logger, DataService dataService)
         {
             _logger = logger;
+            _dataService = dataService;
         }
 
         public IActionResult Index()
         {
+            var allVaccines = _dataService.Count();
 
-            return View();
+            return View(allVaccines);
         }
 
 
