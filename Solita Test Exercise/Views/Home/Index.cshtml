@@ -1,14 +1,9 @@
-﻿@model List<THL.DAL.Entities.Vaccine>
+﻿@model Solita_Test_Exercise.ViewModels.HomeViewModel;
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    @foreach (var v in Model)
-            {
-                <ul>
-                    
-                    @v.VaccinationId
-                </ul>
-            }
+    @Model.TotalVaccinesCame<br />
+    @Model.TotalVaccinationsNumber
 </div>

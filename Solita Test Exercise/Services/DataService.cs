@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using THL.DAL.Context;
-using THL.DAL.Entities;
 
 namespace Solita_Test_Exercise.Services
 {
@@ -14,9 +12,16 @@ namespace Solita_Test_Exercise.Services
             _db = context;
         }
 
-        internal List<Vaccine> Count()
+        internal int TotalVaccinesCame()
         {
-            var data = _db.Vaccines.ToList();
+            int data = _db.VaccineOrders.Count();
+
+            return data;
+        }
+
+        internal int TotalVaccinationsNumber()
+        {
+            int data = _db.Vaccines.Count();
 
             return data;
         }

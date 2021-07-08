@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Solita_Test_Exercise.Models;
 using Solita_Test_Exercise.Services;
+using Solita_Test_Exercise.ViewModels;
 using System.Diagnostics;
 
 namespace Solita_Test_Exercise.Controllers
@@ -20,9 +21,13 @@ namespace Solita_Test_Exercise.Controllers
 
         public IActionResult Index()
         {
-            var allVaccines = _dataService.Count();
+            var viewModel = new HomeViewModel();
 
-            return View(allVaccines);
+            viewModel.TotalVaccinesCame = _dataService.TotalVaccinesCame();
+
+            viewModel.TotalVaccinationsNumber = _dataService.TotalVaccinationsNumber();
+
+            return View(viewModel);
         }
 
 
