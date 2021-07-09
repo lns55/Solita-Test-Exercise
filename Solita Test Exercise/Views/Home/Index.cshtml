@@ -1,9 +1,19 @@
-﻿@model Solita_Test_Exercise.ViewModels.HomeViewModel;
+﻿@model Solita_Test_Exercise.ViewModels.HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    @Model.TotalVaccinesCame<br />
-    @Model.TotalVaccinationsNumber
+    @Model.TotalVaccinesCame<br /><br /><br />
+    @Model.TotalVaccinationsNumber<br /><br /><br />
+    @foreach (var v in Model.ArrivedInMonth)
+        {
+            @v.Id<br />
+            @v.Vaccine<br />
+            @v.ResponsiblePerson<br />
+            @v.HealthCareDistrict<br />
+            @v.OrderNumber<br />
+            @v.Injections<br />
+            @v.Arrived<br />
+        } 
 </div>

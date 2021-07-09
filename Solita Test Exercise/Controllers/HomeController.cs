@@ -27,6 +27,8 @@ namespace Solita_Test_Exercise.Controllers
 
             viewModel.TotalVaccinationsNumber = _dataService.TotalVaccinationsNumber();
 
+            viewModel.ArrivedInMonth = _dataService.ArrivedInMonth();
+
             return View(viewModel);
         }
 

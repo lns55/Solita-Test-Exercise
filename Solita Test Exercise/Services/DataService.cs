@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using THL.DAL.Context;
+using THL.DAL.Entities;
 
 namespace Solita_Test_Exercise.Services
 {
@@ -24,6 +26,15 @@ namespace Solita_Test_Exercise.Services
             int data = _db.Vaccines.Count();
 
             return data;
+        }
+
+        internal List<VaccineOrder> ArrivedInMonth()
+        {
+            var data = _db.VaccineOrders.OrderByDescending(v => v.Arrived);
+
+            var sortData = data.Take(30);
+
+            return sortData.ToList();
         }
     }
 }
