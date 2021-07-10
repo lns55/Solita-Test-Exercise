@@ -48,4 +48,17 @@
         @l.Injections<br />
         @l.Arrived<br />
     } <br /><br /><br />
+
+    @Model.LeftToUse<br /><br /><br />
+
+    @foreach (var l in Model.LeftToUseList)
+    {
+        @l.Id<br />
+        @l.Vaccine<br />
+        @l.ResponsiblePerson<br />
+        @l.HealthCareDistrict<br />
+        @l.OrderNumber<br />
+        @l.Injections<br />
+        @l.Arrived<br />
+    } <br /><br /><br />
 </div>

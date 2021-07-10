@@ -125,5 +125,32 @@ namespace Solita_Test_Exercise.Services
             return vaccinesLeft;
         }
 
+        internal int LeftToUse()//Method shows how much vaccines are left to use from "today" date.
+        {
+            DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
+
+            DateTime arrivedDate = todayDate.AddDays(-29);
+
+            var usedVaccines = _db.Vaccines.Select(v => v.SourceBottle);
+
+            var leftToUse = _db.VaccineOrders.Where(v => v.Arrived.Date > arrivedDate && v.Id != usedVaccines.ToString())
+                .Count();
+
+            return leftToUse;
+        }
+
+        internal List<VaccineOrder> LeftToUseList()//Method shows how much vaccines are left to use from "today" date.
+        {
+            DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
+
+            DateTime arrivedDate = todayDate.AddDays(-29);
+
+            var usedVaccines = _db.Vaccines.Select(v => v.SourceBottle);
+
+            var leftToUse = _db.VaccineOrders.Where(v => v.Arrived.Date > arrivedDate && v.Id != usedVaccines.ToString())
+                .ToList();
+
+            return leftToUse;
+        }
     }
 }

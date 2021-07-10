@@ -41,6 +41,10 @@ namespace Solita_Test_Exercise.Controllers
 
             viewModel.ExpireSoonList = _dataService.ExpireSoonList();
 
+            viewModel.LeftToUse = _dataService.LeftToUse();
+
+            viewModel.LeftToUseList = _dataService.LeftToUseList();
+
             return View(viewModel);
         }
 

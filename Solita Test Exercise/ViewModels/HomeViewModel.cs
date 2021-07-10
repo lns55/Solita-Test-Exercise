@@ -22,5 +22,9 @@ namespace Solita_Test_Exercise.ViewModels
         public int ExpireSoon { get; set; }
 
         public List<VaccineOrder> ExpireSoonList { get; set; }
+
+        public int LeftToUse { get; set; }
+
+        public List<VaccineOrder> LeftToUseList { get; set; }
     }
 }
