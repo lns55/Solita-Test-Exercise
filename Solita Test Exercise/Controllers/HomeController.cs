@@ -23,11 +23,23 @@ namespace Solita_Test_Exercise.Controllers
         {
             var viewModel = new HomeViewModel();
 
+            viewModel.TotalOrders = _dataService.TotalOrders();
+
             viewModel.TotalVaccinesCame = _dataService.TotalVaccinesCame();
 
             viewModel.TotalVaccinationsNumber = _dataService.TotalVaccinationsNumber();
 
             viewModel.ArrivedInMonth = _dataService.ArrivedInMonth();
+
+            viewModel.VaccineProducers = _dataService.VaccineProducers();
+
+            viewModel.ExpireToday = _dataService.ExpireToday();
+
+            viewModel.ExpireTodayList = _dataService.ExpireTodayList();
+
+            viewModel.ExpireSoon = _dataService.ExpireSoon();
+
+            viewModel.ExpireSoonList = _dataService.ExpireSoonList();
 
             return View(viewModel);
         }

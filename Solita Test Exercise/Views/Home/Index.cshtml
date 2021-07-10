@@ -4,16 +4,48 @@
 }
 
 <div class="text-center">
+    @Model.TotalOrders<br /><br /><br />
     @Model.TotalVaccinesCame<br /><br /><br />
     @Model.TotalVaccinationsNumber<br /><br /><br />
     @foreach (var v in Model.ArrivedInMonth)
-        {
-            @v.Id<br />
-            @v.Vaccine<br />
-            @v.ResponsiblePerson<br />
-            @v.HealthCareDistrict<br />
-            @v.OrderNumber<br />
-            @v.Injections<br />
-            @v.Arrived<br />
-        } 
+    {
+        @v.Id<br />
+        @v.Vaccine<br />
+        @v.ResponsiblePerson<br />
+        @v.HealthCareDistrict<br />
+        @v.OrderNumber<br />
+        @v.Injections<br />
+        @v.Arrived<br />
+    } <br /><br /><br />
+
+    @foreach (var dict in Model.VaccineProducers)
+    {
+        <span>@dict.Key</span><br />
+        <span>@dict.Value</span><br />
+    }<br /><br /><br />
+
+    @Model.ExpireToday<br /><br /><br />
+    @foreach (var l in Model.ExpireTodayList)
+    {
+        @l.Id<br />
+        @l.Vaccine<br />
+        @l.ResponsiblePerson<br />
+        @l.HealthCareDistrict<br />
+        @l.OrderNumber<br />
+        @l.Injections<br />
+        @l.Arrived<br />
+    } <br /><br /><br />
+
+    @Model.ExpireSoon<br /><br /><br />
+
+    @foreach (var l in Model.ExpireSoonList)
+    {
+        @l.Id<br />
+        @l.Vaccine<br />
+        @l.ResponsiblePerson<br />
+        @l.HealthCareDistrict<br />
+        @l.OrderNumber<br />
+        @l.Injections<br />
+        @l.Arrived<br />
+    } <br /><br /><br />
 </div>
