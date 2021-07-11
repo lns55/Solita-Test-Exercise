@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using THL.DAL.Context;
@@ -42,7 +41,7 @@ namespace Solita_Test_Exercise.Services
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
             DateTime monthAgo = todayDate.AddDays(-30);
-
+            
             var data = _db.VaccineOrders.OrderByDescending(v => v.Arrived.Date)
                 .Where(v => v.Arrived.Date <= todayDate && v.Arrived.Date >= monthAgo)
                 .ToList();
@@ -94,7 +93,7 @@ namespace Solita_Test_Exercise.Services
             var expiredVaccinesList = _db.VaccineOrders.Where(v => v.Arrived.Date == expireDate && v.Id != vaccinesDone.ToString())
                 .ToList();
 
-            return expiredVaccinesList;    
+            return expiredVaccinesList;
         }
 
         internal int ExpireSoon()//Returns number of vaccines that will expire after 10 days.
