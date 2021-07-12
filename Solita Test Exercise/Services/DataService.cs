@@ -15,6 +15,10 @@ namespace Solita_Test_Exercise.Services
             _db = context;
         }
 
+        public DataService()
+        {
+        }
+
         internal int TotalOrders()
         {
             int data = _db.VaccineOrders.Count();

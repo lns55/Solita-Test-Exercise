@@ -19,6 +19,10 @@ namespace Solita_Test_Exercise.Controllers
             _dataService = dataService;
         }
 
+        public HomeController()
+        {
+        }
+
         public IActionResult Index()
         {
             var viewModel = new HomeViewModel();
