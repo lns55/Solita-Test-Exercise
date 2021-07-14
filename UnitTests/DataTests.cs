@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using Solita_Test_Exercise.Controllers;
 using Solita_Test_Exercise.Services;
+using System.Linq;
 
 namespace AppUnitTests
 {
@@ -10,34 +10,20 @@ namespace AppUnitTests
     {
         private DataService dataService;
 
-        private HomeController controller;
-
         [SetUp]
         public void SetUp()
         {
             dataService = new DataService();
-
-            controller = new HomeController();
         }
 
         [Test]
         public void Test1()
         {
             //Action
-            var data = dataService.GetType().GetMethods();
+            var totalVaccinations = dataService.TotalVaccinationsNumber();
 
             //Assert
-            Assert.IsNotEmpty(data);
-        }
-
-        [Test]
-        public void Test2()
-        {
-            //Action 
-            var data = controller.GetType().GetMethods();
-
-            //Assert
-            Assert.IsNotEmpty(data);
+            Assert.IsNotNull(totalVaccinations);
         }
     }
 }

@@ -3,62 +3,291 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    @Model.TotalOrders<br /><br /><br />
-    @Model.TotalVaccinesCame<br /><br /><br />
-    @Model.TotalVaccinationsNumber<br /><br /><br />
-    @foreach (var v in Model.ArrivedInMonth)
-    {
-        @v.Id<br />
-        @v.Vaccine<br />
-        @v.ResponsiblePerson<br />
-        @v.HealthCareDistrict<br />
-        @v.OrderNumber<br />
-        @v.Injections<br />
-        @v.Arrived<br />
-    } <br /><br /><br />
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-static-top navbar-light navbar-border navbar-brand-center">
+    <div class="navbar-wrapper">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="https://github.com/lns55/Solita-Test-Exercise">
+                        <h2 class="brand-text">THL App</h2>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    @foreach (var dict in Model.VaccineProducers)
-    {
-        <span>@dict.Key</span><br />
-        <span>@dict.Value</span><br />
-    }<br /><br /><br />
-
-    @Model.ExpireToday<br /><br /><br />
-    @foreach (var l in Model.ExpireTodayList)
-    {
-        @l.Id<br />
-        @l.Vaccine<br />
-        @l.ResponsiblePerson<br />
-        @l.HealthCareDistrict<br />
-        @l.OrderNumber<br />
-        @l.Injections<br />
-        @l.Arrived<br />
-    } <br /><br /><br />
-
-    @Model.ExpireSoon<br /><br /><br />
-
-    @foreach (var l in Model.ExpireSoonList)
-    {
-        @l.Id<br />
-        @l.Vaccine<br />
-        @l.ResponsiblePerson<br />
-        @l.HealthCareDistrict<br />
-        @l.OrderNumber<br />
-        @l.Injections<br />
-        @l.Arrived<br />
-    } <br /><br /><br />
-
-    @Model.LeftToUse<br /><br /><br />
-
-    @foreach (var l in Model.LeftToUseList)
-    {
-        @l.Id<br />
-        @l.Vaccine<br />
-        @l.ResponsiblePerson<br />
-        @l.HealthCareDistrict<br />
-        @l.OrderNumber<br />
-        @l.Injections<br />
-        @l.Arrived<br />
-    } <br /><br /><br />
+<div class="app-content container center-layout mt-2">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- Analytics spakline & chartjs  -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="card">
+                        <div class="card-header border-0-bottom">
+                            <h4 class="card-title">Vaccination Overview</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="row my-1">
+                                    <div class="col-lg-4 col-12">
+                                        <div class="text-center">
+                                            <h3>@Model.TotalVaccinationsNumber</h3>
+                                            <p class="text-muted">Total Vaccinations</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-12">
+                                        <div class="text-center">
+                                            <h3>@Model.TotalOrders</h3>
+                                            <p class="text-muted">Total Orders</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-12">
+                                        <div class="text-center">
+                                            <h3>@Model.TotalVaccinesCame</h3>
+                                            <p class="text-muted">Total Vaccines Came</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="chartjs">
+                                            <canvas id="line-stacked-area" height="300"></canvas>
+                                        </div>
+                                        <ul class="list-inline text-center mt-1">
+                                            <li class="mr-1">
+                                                <h6><i class="fa fa-circle success"></i> <span>Total Vaccinations</span></h6>
+                                            </li>
+                                            <li class="mr-1">
+                                                <h6><i class="fa fa-circle warning"></i> <span>Total Orders</span></h6>
+                                            </li>
+                                            <li class="mr-1">
+                                                <h6><i class="fa fa-circle danger"></i> <span>Total Vaccines Arrived</span></h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Analytics spakline & chartjs  -->
+            <!--stats-->
+            <div class="row">
+                <div class="col-xl-3 col-lg-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body text-left w-100">
+                                        <h3 class="primary">@Model.LeftToUse</h3>
+                                        <span>Left to use vaccines</span>
+                                    </div>
+                                    <div class="media-right media-middle">
+                                        <i class="icon-user-follow primary font-large-2 float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body text-left w-100">
+                                        <h3 class="danger">@Model.ArrivedInMonth</h3>
+                                        <span>Arrived in month</span>
+                                    </div>
+                                    <div class="media-right media-middle">
+                                        <i class="icon-calendar danger font-large-2 float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body text-left w-100">
+                                        <h3 class="success">@Model.ExpireSoon</h3>
+                                        <span>Vaccines that expire soon</span>
+                                    </div>
+                                    <div class="media-right media-middle">
+                                        <i class="icon-clock success font-large-2 float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body text-left w-100">
+                                        <h3 class="warning">@Model.ExpireToday</h3>
+                                        <span>Vaccines that expire today</span>
+                                    </div>
+                                    <div class="media-right media-middle">
+                                        <i class="icon-clock warning font-large-2 float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/stats-->
+            <!-- Audience by country & users visit-->
+            <div class="row match-height">
+                <div class="col-xl-8 col-lg-12">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h4 class="card-title">List of vaccines that left to use</h4>
+                        </div>
+                        <div class="card-content">
+                            <div id="audience-list-scroll" class="table-responsive height-300 position-relative">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Number</th>
+                                            <th>Responisble Person</th>
+                                            <th>Injections</th>
+                                            <th>Arrived</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var e in Model.LeftToUseList)
+                                        {
+                                            <tr>
+                                                <td>@e.OrderNumber</td>
+                                                <td>@e.ResponsiblePerson</td>
+                                                <td>@e.Injections</td>
+                                                <td>@e.Arrived</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <canvas id="myChart" width="200" height="200" aria-label="Chart" role="img"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Audience by country  & users visit -->
+            <!-- Bounce Rate & List -->
+            <div class="row match-height">
+                <div class="col-xl-4 col-lg-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body sales-growth-chart">
+                                <div class="chart-title">
+                                    <h1 class="display-4">32%</h1>
+                                    <span class="text-muted">Bounce Rate</span>
+                                </div>
+                                <div id="bounce-rate" class="height-250"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-12">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h4 class="card-title">List of vaccines that expires today</h4>
+                        </div>
+                        <div class="card-content">
+                            <div id="audience-list-scroll" class="table-responsive height-300 position-relative">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Number</th>
+                                            <th>Responisble Person</th>
+                                            <th>Vaccine</th>
+                                            <th>Arrived</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var e in Model.ExpireTodayList)
+                                        {
+                                            <tr>
+                                                <td>@e.OrderNumber</td>
+                                                <td>@e.ResponsiblePerson</td>
+                                                <td>@e.Vaccine</td>
+                                                <td>@e.Arrived</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row match-height">
+                <div class="col-xl-8 col-lg-12">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h4 class="card-title">List of vaccines that expire soon</h4>
+                        </div>
+                        <div class="card-content">
+                            <div id="audience-list-scroll" class="table-responsive height-300 position-relative">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Number</th>
+                                            <th>Responisble Person</th>
+                                            <th>Vaccine</th>
+                                            <th>Arrived</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var e in Model.ExpireTodayList)
+                                        {
+                                            <tr>
+                                                <td>@e.OrderNumber</td>
+                                                <td>@e.ResponsiblePerson</td>
+                                                <td>@e.Vaccine</td>
+                                                <td>@e.Arrived</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body sales-growth-chart">
+                                <div class="chart-title">
+                                    <h1 class="display-4">32%</h1>
+                                    <span class="text-muted">Bounce Rate</span>
+                                </div>
+                                <div id="bounce-rate" class="height-250"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

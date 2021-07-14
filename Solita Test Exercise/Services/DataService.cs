@@ -19,28 +19,41 @@ namespace Solita_Test_Exercise.Services
         {
         }
 
-        internal int TotalOrders()
+        public int TotalOrders()
         {
             int data = _db.VaccineOrders.Count();
 
             return data;
         }
 
-        internal int TotalVaccinesCame()
+        public int TotalVaccinesCame()
         {
             int data = _db.VaccineOrders.Select(v => v.Injections).Sum();
 
             return data;
         }
 
-        internal int TotalVaccinationsNumber()
+        public int TotalVaccinationsNumber()
         {
             int data = _db.Vaccines.Count();
 
             return data;
         }
 
-        internal List<VaccineOrder> ArrivedInMonth()//Method shows how much vaccines arrived in last 30 days.
+        public int ArrivedInMonth()//Method shows how much vaccines arrived in last 30 days.
+        {
+            DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
+
+            DateTime monthAgo = todayDate.AddDays(-30);
+
+            var data = _db.VaccineOrders.OrderByDescending(v => v.Arrived.Date)
+                .Where(v => v.Arrived.Date <= todayDate && v.Arrived.Date >= monthAgo)
+                .Count();
+
+            return data;
+        }
+
+        public List<VaccineOrder> ArrivedInMonthList()//Method shows how much vaccines arrived in last 30 days.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
@@ -53,7 +66,7 @@ namespace Solita_Test_Exercise.Services
             return data;
         }
 
-        internal Dictionary<string, int> VaccineProducers()// Method showing how much vaccines came from different companies.
+        public Dictionary<string, int> VaccineProducers()// Method showing how much vaccines came from different companies.
         {
 
             int antiquaQuantity = _db.VaccineOrders.Where(v => v.Vaccine == "Antiqua").Count();
@@ -72,7 +85,7 @@ namespace Solita_Test_Exercise.Services
             return dict;
         }
 
-        internal int ExpireToday()//Method showing how much vaccines will expire today.
+        public int ExpireToday()//Method showing how much vaccines will expire today.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
@@ -86,7 +99,7 @@ namespace Solita_Test_Exercise.Services
             return expiredVaccines;
         }
 
-        internal List<VaccineOrder> ExpireTodayList()//returning the list of the expiring vaccines.
+        public List<VaccineOrder> ExpireTodayList()//returning the list of the expiring vaccines.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
@@ -100,7 +113,7 @@ namespace Solita_Test_Exercise.Services
             return expiredVaccinesList;
         }
 
-        internal int ExpireSoon()//Returns number of vaccines that will expire after 10 days.
+        public int ExpireSoon()//Returns number of vaccines that will expire after 10 days.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
@@ -114,7 +127,7 @@ namespace Solita_Test_Exercise.Services
             return vaccinesLeft;
         }
 
-        internal List<VaccineOrder> ExpireSoonList()//Returns list of vaccines that will expire after 10 days.
+        public List<VaccineOrder> ExpireSoonList()//Returns list of vaccines that will expire after 10 days.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
@@ -128,7 +141,7 @@ namespace Solita_Test_Exercise.Services
             return vaccinesLeft;
         }
 
-        internal int LeftToUse()//Method shows how much vaccines are left to use from "today" date.
+        public int LeftToUse()//Method shows how much vaccines are left to use from "today" date.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 
@@ -142,7 +155,7 @@ namespace Solita_Test_Exercise.Services
             return leftToUse;
         }
 
-        internal List<VaccineOrder> LeftToUseList()//Method shows how much vaccines are left to use from "today" date.
+        public List<VaccineOrder> LeftToUseList()//Method shows how much vaccines are left to use from "today" date.
         {
             DateTime todayDate = new DateTime(2021, 04, 12);//In real app we can write DateTime.Now and we will get method that counts from todays date.
 

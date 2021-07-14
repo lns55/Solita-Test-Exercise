@@ -10,8 +10,9 @@ namespace Solita_Test_Exercise.ViewModels
         public int TotalVaccinesCame { get; set; }
 
         public int TotalVaccinationsNumber { get; set; }
+        public int ArrivedInMonth { get; set; }
 
-        public List<VaccineOrder> ArrivedInMonth { get; set; }
+        public List<VaccineOrder> ArrivedInMonthList { get; set; }
 
         public Dictionary<string, int> VaccineProducers { get; set; }
 

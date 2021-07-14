@@ -19,10 +19,6 @@ namespace Solita_Test_Exercise.Controllers
             _dataService = dataService;
         }
 
-        public HomeController()
-        {
-        }
-
         public IActionResult Index()
         {
             var viewModel = new HomeViewModel();
@@ -34,6 +30,8 @@ namespace Solita_Test_Exercise.Controllers
             viewModel.TotalVaccinationsNumber = _dataService.TotalVaccinationsNumber();
 
             viewModel.ArrivedInMonth = _dataService.ArrivedInMonth();
+
+            viewModel.ArrivedInMonthList = _dataService.ArrivedInMonthList();
 
             viewModel.VaccineProducers = _dataService.VaccineProducers();
 
